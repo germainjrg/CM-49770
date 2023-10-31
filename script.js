@@ -10,16 +10,15 @@ function inicio (){
        
         ejecutarCalculadora(); // se ejecuta la calculadora
 
-        let consulta = prompt("¿Deseas realizar otra operacion? \n\n Escribe SI o NO, sin acentos.").toLowerCase();
+        let consulta = confirm("¿Deseas realizar otra operacion?");
 
-        if (consulta == "si") {
+        if (consulta == true) {
             seguirEjecutando = true;
         } else {
             seguirEjecutando = false;
             alert("¡Gracias por usar la calculadora!");
         }
     }
-
 }
 
 function ejecutarCalculadora() {
@@ -82,6 +81,7 @@ function ejecutarCalculadora() {
         break;
 
         case "division":
+            let resultadoResta = 0;
 
             do {
                 let G = parseFloat(prompt("Escribe el dividendo"));
@@ -90,8 +90,14 @@ function ejecutarCalculadora() {
                 if (isNaN(G) || isNaN(H)) { //Se compara si E o F son numeros validos
                     alert("Por favor, ingresa un numero correcto.");
                 }
+                else if (H == 0 || H == null || H == " ") {
+                    H = parseFloat(prompt("No puedes dividir entre 0, ingresa otro divisor"));
+                    resultadoResta = G / H;
+                    alert("El resultado de la division es: " + resultadoResta);
+                    operacionRealizada = true; // Se cambia a true para salir del do while
+                }
                 else {
-                    let resultadoResta = G / H;
+                    resultadoResta = G / H;
                     alert("El resultado de la division es: " + resultadoResta);
                     operacionRealizada = true; // Se cambia a true para salir del do while
                 }
@@ -103,5 +109,4 @@ function ejecutarCalculadora() {
             alert("Por favor, introduce una operacion valida.\n \nEscribe: \n- suma  \n- resta  \n- multiplicacion  \n- division");
         break;
     }
-
 }
